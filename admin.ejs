@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HelpDesk Pro</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container" style="max-width: 1000px;">
+        <div class="nav">
+            <a href="/">🏠 Back to Home</a>
+            <a href="/admin">🔄 Refresh</a>
+        </div>
+        <h1>🛠️ Admin Dashboard</h1>
+        <p style="text-align: center;">Total Tickets: <%= tickets.length %></p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Ticket ID</th>
+                    <th>Customer</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% tickets.forEach(ticket => { %>
+                    <tr>
+                        <td><%= ticket._id.toString().slice(-6) %></td>
+                        <td><%= ticket.customerName %><br><small><%= ticket.customerEmail %></small></td>
+                        <td><strong><%= ticket.subject %></strong><br><small><%= ticket.description.substring(0, 50) %>...</small></td>
+                        <td class="status-<%= ticket.status %>"><%= ticket.status %></td>
+                        <td><%= ticket.createdAt.toLocaleDateString('en-GB') %></td>
+                        <td class="action-buttons">
+                            <% if (ticket.status === 'Open') { %>
+                                <form action="/tickets/<%= ticket._id %>?_method=PUT" method="POST">
+                                    <button type="submit" class="btn-close">Close</button>
+                                </form>
+                            <% } %>
+                            <form action="/tickets/<%= ticket._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure?');">
+                                <button type="submit" class="btn-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
