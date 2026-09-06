@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Ticket - HelpDesk Pro</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">Submit Ticket</a>
+            <a href="/admin">Admin Panel</a>
+        </div>
+        <h1>🎫 Submit New Ticket</h1>
+        <form action="/tickets" method="POST">
+            <input type="text" name="customerName" placeholder="Your Full Name" required>
+            <input type="email" name="customerEmail" placeholder="Your Email Address" required>
+            <input type="text" name="subject" placeholder="Issue Subject (e.g., Login Problem)" required>
+            <textarea name="description" rows="6" placeholder="Please describe your issue in detail..." required></textarea>
+            <button type="submit" class="submit-btn">Submit Ticket</button>
+        </form>
+    </div>
+</body>
+</html>
